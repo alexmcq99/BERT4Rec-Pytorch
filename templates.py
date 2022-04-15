@@ -5,14 +5,26 @@ def set_template(args):
     elif args.template.startswith('train_bert'):
         args.mode = 'train'
 
-        args.dataset_code = 'ml-' + input('Input 1 for ml-1m, 20 for ml-20m: ') + 'm'
+        option = input('Input 1 for ml-1m, 2 for ml-20m, 3 for Amazon video games, 4 for Amazon movies and TV, or 5 for Amazon books: ')
+        if option == '1':
+            args.dataset_code = 'ml-1m'
+        elif option == '2':
+            args.dataset_code = 'ml-20m'
+        elif option == '3':
+            args.dataset_code = 'video_games'
+        elif option == '4':
+            args.dataset_code = 'movies_and_tv'
+        else:
+            args.dataset_code = 'books'
+        print(args.dataset_code)
+
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
         args.split = 'leave_one_out'
 
         args.dataloader_code = 'bert'
-        batch = 128
+        batch = 64
         args.train_batch_size = batch
         args.val_batch_size = batch
         args.test_batch_size = batch
