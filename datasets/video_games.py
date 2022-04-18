@@ -20,7 +20,7 @@ class VideoGamesDataset(AbstractDataset):
 
     @classmethod
     def all_raw_file_names(cls):
-        return ['video_games_factorized.csv']
+        return ['video_games.txt']
 
     def load_ratings_df(self):
         folder_path = self._get_rawdata_folder_path()

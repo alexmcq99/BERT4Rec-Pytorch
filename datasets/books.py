@@ -20,7 +20,7 @@ class BooksDataset(AbstractDataset):
 
     @classmethod
     def all_raw_file_names(cls):
-        return ['books_factorized.csv']
+        return ['books.txt']
 
     def load_ratings_df(self):
         folder_path = self._get_rawdata_folder_path()
