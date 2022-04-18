@@ -20,11 +20,11 @@ class MoviesAndTVDataset(AbstractDataset):
 
     @classmethod
     def all_raw_file_names(cls):
-        return ['movies_and_tv_factorized.csv']
+        return ['movies_and_tv.txt']
 
     def load_ratings_df(self):
         folder_path = self._get_rawdata_folder_path()
-        file_path = folder_path.joinpath('movies_and_tv_factorized.csv')
-        df = pd.read_csv(file_path, header=None)
+        file_path = folder_path.joinpath('movies_and_tv.txt')
+        df = pd.read_csv(file_path, sep=" ", header=None)
         df.columns = ['uid', 'sid', 'rating', 'timestamp']
         return df

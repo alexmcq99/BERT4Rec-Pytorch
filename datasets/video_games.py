@@ -24,7 +24,7 @@ class VideoGamesDataset(AbstractDataset):
 
     def load_ratings_df(self):
         folder_path = self._get_rawdata_folder_path()
-        file_path = folder_path.joinpath('video_games_factorized.csv')
-        df = pd.read_csv(file_path, header=None)
+        file_path = folder_path.joinpath('video_games.txt')
+        df = pd.read_csv(file_path, sep=" ", header=None)
         df.columns = ['uid', 'sid', 'rating', 'timestamp']
         return df
