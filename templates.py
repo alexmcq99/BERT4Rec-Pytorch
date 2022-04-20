@@ -5,26 +5,33 @@ def set_template(args):
     elif args.template.startswith('train_bert'):
         args.mode = 'train'
 
-        option = input('Input 1 for ml-1m, 2 for ml-20m, 3 for Amazon video games, 4 for Amazon movies and TV, or 5 for Amazon books: ')
-        if option == '1':
-            args.dataset_code = 'ml-1m'
-        elif option == '2':
-            args.dataset_code = 'ml-20m'
-        elif option == '3':
-            args.dataset_code = 'video_games'
-        elif option == '4':
-            args.dataset_code = 'movies_and_tv'
+        if not args.dataset_code:
+            option = input('Input 1 for ml-1m, 2 for ml-20m, 3 for Amazon video games, 4 for Amazon movies and TV, or 5 for Amazon books: ')
+            if option == '1':
+                args.dataset_code = 'ml-1m'
+            elif option == '2':
+                args.dataset_code = 'ml-20m'
+            elif option == '3':
+                args.dataset_code = 'video_games'
+            elif option == '4':
+                args.dataset_code = 'movies_and_tv'
+            else:
+                args.dataset_code = 'books'
         else:
-            args.dataset_code = 'books'
-        print(args.dataset_code)
+            print(args.dataset_code)
 
-        args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
+        if args.dataset_code == 'ml-20m':
+            args.min_rating = 4
+        elif args.dataset_code == 'ml-1m':
+            args.min_rating = 0
+        else:
+            args.min_rating = 1
         args.min_uc = 5
         args.min_sc = 0
         args.split = 'leave_one_out'
 
         args.dataloader_code = 'bert'
-        batch = 64
+        batch = 128
         args.train_batch_size = batch
         args.val_batch_size = batch
         args.test_batch_size = batch
@@ -45,16 +52,16 @@ def set_template(args):
         args.enable_lr_schedule = True
         args.decay_step = 25
         args.gamma = 1.0
-        args.num_epochs = 100 if args.dataset_code == 'ml-1m' else 200
-        args.metric_ks = [1, 5, 10, 20, 50, 100]
+        args.num_epochs = 100
+        args.metric_ks = [1, 5, 10]
         args.best_metric = 'NDCG@10'
 
         args.model_code = 'bert'
         args.model_init_seed = 0
 
-        args.bert_dropout = 0.1
+        args.bert_dropout = 0.2
         args.bert_hidden_units = 256
-        args.bert_mask_prob = 0.15
+        args.bert_mask_prob = 0.4
         args.bert_max_len = 100
         args.bert_num_blocks = 2
         args.bert_num_heads = 4
