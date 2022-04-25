@@ -31,7 +31,7 @@ def set_template(args):
         args.split = 'leave_one_out'
 
         args.dataloader_code = 'bert'
-        batch = 96
+        batch = 128
         args.train_batch_size = batch
         args.val_batch_size = batch
         args.test_batch_size = batch
@@ -48,9 +48,8 @@ def set_template(args):
         args.num_gpu = 1
         args.device_idx = '0'
         args.optimizer = 'Adam'
-        args.lr = 1e-4
+        args.lr = 0.001
         args.enable_lr_schedule = True
-        args.weight_decay = 0.01
         args.decay_step = 25
         args.gamma = 1.0
         args.num_epochs = 100
@@ -62,10 +61,10 @@ def set_template(args):
 
         args.bert_dropout = 0.2
         args.bert_hidden_units = 256
-        args.bert_mask_prob = 0.2
+        args.bert_mask_prob = 0.4
         args.bert_max_len = 100
         args.bert_num_blocks = 2
-        args.bert_num_heads = 2
+        args.bert_num_heads = 4
     
     elif args.template.startswith('train_dae'):
         args.mode = 'train'
